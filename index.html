@@ -360,77 +360,96 @@
   
     /* Responsive */
     @media (max-width: 768px) {
-      .header-section h1 {
-        font-size: 3rem;
-      }
+  .header-section {
+    padding: 40px 20px;
+    min-height: auto;
+  }
 
-      .header-section h2 {
-        font-size: 1.2rem;
-        margin-top: -20px;
-      }
+  .header-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 5px;
+    letter-spacing: 1px;
+  }
 
-      .about-text p {
-        font-size: 1rem;
-      }
+  .header-section h2 {
+    font-size: 1rem; 
+    margin-top: -10px; 
+  }
+}
 
-      .boxes-container {
-        flex-direction: column;
-        align-items: center;
-      }
+@media (max-width: 768px) {
+  section {
+    margin: 20px auto; 
+    padding: 0 15px;
+  }
 
-      .box {
-        flex: 1 1 100%;
-        max-width: 90%;
-      }
+  .section-title {
+    font-size: 1.4rem; 
+    margin-bottom: 15px;
+    margin-top: 0; 
+  }
 
-      footer input[type="text"],
-      footer textarea {
-        font-size: 0.9rem;
-      }
+  .about-text .section-title {
+    margin-top: 0 !important;
+  }
+}
 
-      footer button {
-        font-size: 0.9rem;
-      }
-    }
-    @media (max-width: 768px) {
-      .about-me {
-        flex-direction: column;
-        text-align: center;
-      }
+@media (max-width: 768px) {
+  .coding-profiles {
+    text-align: center;
+  }
 
-      .about-photo {
-        margin-bottom: 20px;
-        margin-left: auto;
-        margin-right: auto;
-      }
+  .coding-profiles a {
+    margin: 0 10px 10px 0; 
+    display: inline-block;
+  }
 
-      nav {
-        top: 60px;
-        width: 100%;
-        height: auto;
-        position: fixed;
-        right: -100%;
-        border-radius: 0;
-        box-shadow: none;
-        background-color: #121212dd;
-        transition: right 0.3s ease;
-      }
+  .coding-profiles img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
 
-      nav.open {
-        right: 0;
-      }
+@media (max-width: 768px) {
+  #cocurricular img {
+    width: 100% !important; 
+    max-width: 300px !important;
+    height: auto !important;
+    margin: 10px auto !important;
+    display: block !important;
+  }
+}
 
-      nav ul {
-        flex-direction: row;
-        justify-content: center;
-        gap: 15px;
-        padding: 10px 0;
-      }
+@media (max-width: 768px) {
+  footer {
+    padding: 20px 15px;
+  }
 
-      .boxes-container {
-        justify-content: center;
-      }
-    }
+  footer .social-icons {
+    gap: 15px;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-section h1 {
+    font-size: 2rem;
+  }
+
+  .header-section h2 {
+    font-size: 0.9rem;
+  }
+
+  nav ul {
+    gap: 10px;
+    padding: 5px 0;
+  }
+
+  nav ul li a {
+    font-size: 0.9rem;
+    padding: 6px 10px;
+  }
+}
   </style>
 </head>
 <body>
