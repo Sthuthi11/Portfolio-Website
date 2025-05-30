@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Portfolio Website</title>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #eee;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+
+    .header-section {
+        width: 100%;
+        background-color: #2c3e50;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header-section h1 {
+        font-size: 5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        letter-spacing: 3px;
+    }
+
+    .header-section h2 {
+        font-size: 2rem;
+        font-weight: normal;
+        color: #80cbc4;
+
+    }
+
+    a {
+      color: #80cbc4;
+      text-decoration: none;
+    }
+
+    a:hover {
+      color: #4db6ac;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      border-bottom: 1px solid #333;
+      position: sticky;
+      top: 0;
+      background-color: #121212cc;
+      z-index: 100;
+    }
+
+    .logo {
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      color: #80cbc4;
+    }
+
+    nav {
+      position: fixed;
+      top: 60px;
+      right: -250px;
+      background-color: #222;
+      width: 220px;
+      height: calc(100% - 60px);
+      padding-top: 20px;
+      transition: right 0.3s ease;
+      box-shadow: -2px 0 8px #0008;
+      border-radius: 8px 0 0 8px;
+      z-index: 200;
+    }
+
+    nav.open {
+      right: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-left: 20px;
+    }
+
+    nav ul li {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    nav ul li a {
+      color: #80cbc4;
+      padding: 8px 12px;
+      border-radius: 5px;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      background-color: #4db6ac;
+      color: #121212;
+    }
+
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 28px;
+      height: 22px;
+      cursor: pointer;
+      z-index: 300;
+    }
+
+    .hamburger div {
+      width: 28px;
+      height: 3px;
+      background-color: #80cbc4;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Animate hamburger to X when open */
+    .hamburger.open div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.open div:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open div:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+
+    /* About Me */
+    section {
+      max-width: fill;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .about-me {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid #333;
+      padding-bottom: 30px;
+    }
+
+    .about-text {
+      flex: 1 1 500px;
+    }
+
+    .about-text h2 {
+      color: #80cbc4;
+      margin-bottom: 15px;
+      letter-spacing: 1.5px;
+    }
+
+    .about-text p {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      color: #ccc;
+      text-align: justify;
+    }
+
+    .about-photo {
+        flex: 0 0 400px;
+        max-width: 400px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+        border: 2px solid #80cbc4;
+    }
+
+    .about-photo img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+    }
+
+    /* Sections with boxes */
+    .section-title {
+      color: #80cbc4;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      letter-spacing: 1.5px;
+      border-bottom: 2px solid #4db6ac;
+      padding-bottom: 6px;
+      max-width: max-content;
+    }
+
+    .boxes-container {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+      scrollbar-width: thin;
+      scrollbar-color: #4db6ac transparent;
+    }
+
+    .boxes-container::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .boxes-container::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .boxes-container::-webkit-scrollbar-thumb {
+      background-color: #4db6ac;
+      border-radius: 4px;
+    }
+
+    .box {
+      background: #222;
+      border-radius: 10px;
+      padding: 15px;
+      flex: 0 0 280px;
+      box-shadow: 0 0 15px #00897b88;
+      transition: transform 0.3s ease;
+    }
+
+    .box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 25px #4db6accc;
+    }
+
+    .box img {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      object-fit: cover;
+      height: 140px;
+    }
+
+    .box h3 {
+      margin-bottom: 8px;
+      font-size: 1.2rem;
+      color: #80cbc4;
+    }
+
+    .box p {
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #1a1a1a;
+      padding: 30px 20px;
+      text-align: center;
+      color: #aaa;
+      border-top: 1px solid #333;
+      margin-top: 40px;
+    }
+
+    footer .message {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      color: #80cbc4;
+      font-weight: 600;
+    }
+
+    footer .contact-info {
+      margin-bottom: 15px;
+      font-size: 1rem;
+    }
+
+    footer .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+
+    footer .social-icons a {
+      color: #80cbc4;
+      transition: color 0.3s ease;
+    }
+
+    footer .social-icons a:hover {
+      color: #4db6ac;
+    }
+
+    /* Contact */
+    footer label {
+      display: block;
+      margin-bottom: 6px;
+      color: #80cbc4;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    footer input[type="text"],
+    footer textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: none;
+      resize: none;
+      background-color: #222;
+      color: #eee;
+      font-size: 1rem;
+      box-shadow: inset 0 0 5px #0008;
+    }
+
+    footer textarea {
+      height: 80px;
+    }
+
+    footer button {
+      background-color: #80cbc4;
+      border: none;
+      padding: 10px 20px;
+      color: #121212;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    footer button:hover {
+      background-color: #4db6ac;
+    }
+
+    .social-icons a {
+    margin-right: 15px;
+    font-size: 24px;
+    color: #333;   
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .social-icons a:hover {
+    color: #0077b5;
+  }
+  
+    /* Responsive */
+    @media (max-width: 768px) {
+      .about-me {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-photo {
+        margin-bottom: 20px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      nav {
+        top: 60px;
+        width: 100%;
+        height: auto;
+        position: fixed;
+        right: -100%;
+        border-radius: 0;
+        box-shadow: none;
+        background-color: #121212dd;
+        transition: right 0.3s ease;
+      }
+
+      nav.open {
+        right: 0;
+      }
+
+      nav ul {
+        flex-direction: row;
+        justify-content: center;
+        gap: 15px;
+        padding: 10px 0;
+      }
+
+      .boxes-container {
+        justify-content: center;
+      }
+    }
+  </style>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+  <div class="logo">MY PORTFOLIO</div>
+  <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" role="button" tabindex="0">
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+  <nav id="nav-menu" aria-label="Primary Navigation">
+    <ul>
+      <li><a href="#projects" tabindex="0">PROJECTS</a></li>
+      <li><a href="#certifications" tabindex="0">CERTIFICATIONS</a></li>
+      <li><a href="#hackathons" tabindex="0">HACKATHONS</a></li>
+      <li><a href="#cocurricular" tabindex="0">CO-CURRICULAR</a></li>
+      <li><a href="#contact" tabindex="0">CONTACT</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!--Name-->
+<div class="header-section">
+    <h1 style="font-family: 'Times New Roman', Times, serif; color: #80cbc4;">STHUTHI</h1>
+    <h2 style="margin-top: -37px; font-style: italic; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; color:rgba(255, 255, 255, 0.845)">Final Year B.Tech Student</h2>
+    <br>
+</div>
+
+<!-- About Me -->
+<section id="about" class="about-me">
+  <div class="about-text">
+    <h2 class="section-title" style="margin-top: -100px;">ABOUT ME</h2>
+    <a href="https://drive.google.com/file/d/1St96l3fuMSZx6F7aMY20UdqyIOHoTmz3/view?usp=drive_link" target="_blank" class="resume-link" aria-label="Resume"><u><i>Resume</i></u></a>
+    <br><br>
+    <p>
+      I am Sthuthi from Udupi, Karnataka, India, currently pursuing my final year in Information Science and Engineering at N.M.A.M. Institute of Technology.
+I am passionate about technology, continuously updating my skills and contributing to innovative projects.
+I am an avid admirer of all forms of art, and my hobbies include dancing, drawing, reading, and writing.
+    </p>
+  <!-- Coding Profiles -->
+    <div class="coding-profiles" style="margin-top: 20px;">
+      <h2 class="section-subtitle" style="font-size: 1.2rem; margin-bottom: 10px;">CODING PROFILES</h2>
+      <a href="https://leetcode.com/u/Sthuthi11" target="_blank" aria-label="LeetCode" style="margin-right: 20px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/LeetCode_logo_black.png" alt="LeetCode" width="50" height="50" />
+      </a>
+      <a href="https://auth.geeksforgeeks.org/user/sthuthi11" target="_blank" aria-label="GeeksforGeeks" style="margin-right: 20px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/43/GeeksforGeeks.svg" alt="GeeksforGeeks" width="50" height="50" />
+      </a>
+      <a href="https://www.hackerrank.com/profile/nnm22is209" target="_blank" aria-label="HackerRank" style="margin-right: 20px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/40/HackerRank_Icon-1000px.png/500px-HackerRank_Icon-1000px.png" alt="HackerRank" width="50" height="50" />
+      </a>
+      <a href="https://www.hackerearth.com/@NNM22IS209-Sthuthi" target="_blank" aria-label="HackerEarth">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/HackerEarth_logo.png/500px-HackerEarth_logo.png" alt="HackerEarth" width="40" height="40" />
+      </a>
+    </div>
+  </div>
+  <div class="about-photo">
+    <img src="Images/Photo.jpg" alt="Photo" />
+  </div>
+</section>
+
+<section id="projects">
+  <h2 class="section-title">PROJECTS</h2>
+  <div class="boxes-container" aria-label="List of projects">
+    <div class="box" tabindex="0">
+      <h3>Abstractive Summarization of Films and NCERT Science Textbooks</h3>
+      <p>A research internship at Manipal Institute of Technology focused on abstractive summarization using advanced NLP models like BART, T5, and PEGASUS, with the work currently being expanded into a research paper</p>
+    <div class="project-links" style="margin-top: 10px;">
+    <a href="https://drive.google.com/file/d/1JxmFTthPvmXxR8AT3JksnoEsQABaP-6h/view?usp=drive_link" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; color: #80cbc4; text-decoration: none;">
+      Certificate
+    </a>
+    <a href="https://github.com/Sthuthi11/Abstractive-Summarization" target="_blank" rel="noopener noreferrer" style="color: #80cbc4; text-decoration: none;">
+      <i class="fab fa-github" aria-hidden="true" style="font-size: 1.2rem;"></i> Repository
+    </a>
+  </div>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>HealthCare Analysis in R</h3>
+      <p>A menu-based R program which provides statistical analysis and predictive modeling within the healthcare domain</p>
+      <br>
+      <a href="https://github.com/Sthuthi11/HealthCare-Analysis-in-R" target="_blank" rel="noopener noreferrer" style="color: #80cbc4; text-decoration: none;">
+      <i class="fab fa-github" aria-hidden="true" style="font-size: 1.2rem;"></i> Repository
+    </a>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>OrgPulse</h3>
+      <p>A prototype for an organ donation website (Learning project)</p>
+      <br>
+      <a href="https://github.com/Sthuthi11/Organ-Donation-Website" target="_blank" rel="noopener noreferrer" style="color: #80cbc4; text-decoration: none;">
+      <i class="fab fa-github" aria-hidden="true" style="font-size: 1.2rem;"></i> Repository
+    </a>
+    </div>
+    <div class="box" tabindex="0">
+    <img src="Images/bridgerectifier.jpg" alt="Bridge Rectifier Project" style="width: 200px; height: auto; margin: 10px auto; display: block;" />
+      <h3>Construction of Bridge Rectifier using SMPS (Small Scale)</h3>
+      <p>First year project on AC to DC conversion using a bridge rectifier built with SMPS components</p>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Early Detection of Menopause using IoT and DL</h3>
+      <p>Currently working on this as a part of my final year project</p>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Automated deployment Strategies in Kubernetes</h3>
+      <p>Working on implementing deployment strategies including canary, blue-green, and rolling updates</p>
+    </div>
+    </div>
+</section>
+
+
+<section id="certifications">
+  <h2 class="section-title">CERTIFICATIONS</h2>
+  <div class="boxes-container" aria-label="List of CERTIFICATIONS">
+    <div class="box" tabindex="0">
+      <h3>NPTEL Japanese Course</h3>
+      <a href="https://drive.google.com/file/d/16jWTdJl0qsKLmrHJpRCMYM_XHX-la3PE/view" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; color: #80cbc4; text-decoration: none;">
+      Certificate
+    </a>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Coursera: Google Cybersecurity</h3>
+      <a href="https://www.coursera.org/account/accomplishments/professional-cert/TKTP8L3VF2YR" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; color: #80cbc4; text-decoration: none;">
+      Certificate
+    </a>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Coursera: Data Security</h3>
+      <a href="https://www.coursera.org/account/accomplishments/verify/ETCRZ2SRQQN1" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; color: #80cbc4; text-decoration: none;">
+      Certificate
+    </a>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Coursera: IBM Introduction to Web Development</h3>
+      <a href="https://www.coursera.org/account/accomplishments/verify/UBJXTV9U3JGH" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; color: #80cbc4; text-decoration: none;">
+      Certificate
+    </a>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Springboard: Learn SQL with Microsoft SQL Server</h3>
+      <a href="https://drive.google.com/file/d/1eZoLI-SfM6CgPvcW7skEahGqomh4Pm2S/view" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; color: #80cbc4; text-decoration: none;">
+      Certificate
+    </a>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Cousera: Google AI Essentials</h3>
+      <a href="https://www.coursera.org/account/accomplishments/verify/AZJWCMC345R3" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; color: #80cbc4; text-decoration: none;">
+      Certificate
+    </a>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>GDG: Cloud Community Day 2024</h3>
+      <a href="https://drive.google.com/file/d/1MgtoQpHxt7vDeqegN73h5S9KMZ0bPpqu/view?usp=drive_link" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; color: #80cbc4; text-decoration: none;">
+      Certificate
+    </a>
+    </div>
+  </div>
+</section>
+
+
+<section id="hackathons">
+  <h2 class="section-title">HACKATHONS</h2>
+  <div class="boxes-container" aria-label="List of HACKATHONS">
+    <div class="box" tabindex="0">
+      <h3>Smart India Hackathon 2024</h3>
+      <p>Participated in Internal Ideathon held at NMAMIT</p>
+      <br>
+      <a href="https://drive.google.com/file/d/1F2jnCqg6s8DfFAHZ2Fgf5HsYNnRSU-6g/view" target="_blank" rel="noopener noreferrer" style="margin-right: 15px; color: #80cbc4; text-decoration: none;">
+      Certificate
+    </a>
+    </div>
+    <div class="boxes-container" aria-label="List of HACKATHONS">
+    <div class="box" tabindex="0">
+      <h3>DevRev Women AI Hackathon 2024</h3>
+      <p>Participated in DevRev gr.ai.ce Hackathon held at NMAMIT</p>
+    </div>
+  </div>
+  <div class="boxes-container" aria-label="List of HACKATHONS">
+    <div class="box" tabindex="0">
+      <h3>SAP Hackfest 2025</h3>
+      <p>Shortlisted in the Regional round held at NMAMIT and selected for State Hub round</p>
+    </div>
+  </div>
+</section>
+
+
+<section id="cocurricular">
+  <h2 class="section-title">CO-CURRICULAR</h2>
+ <img src="Images/Hackerearth Core.jpg" alt="HackerEarth Core" style="width: 280px; height: auto; margin-top: 10px; margin-right: 17px;" />
+ <img src="Images/Aura Core.jpg" alt="Aura Core" style="width: 280px; height: auto; margin-top: 10px;" />
+  <div class="boxes-container" aria-label="List of CO-CURRICULAR">
+    <div class="box" tabindex="0">
+      <h3>Social Media and Publicity Head 2024-25</h3>
+      <h4>HackerEarth Hub, NMAMIT</h4>
+      <p>Managed social media and participated in event publicity for HackerEarth Hub, a coding club at my college focused on enhancing DSA and technical skills</p>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Social Media Member</h3>
+      <h4>Aura Club, NMAMIT</h4>
+      <p>Was responsible for poster design and video editing for the Aura club</p>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Secretary 2024-25</h3>
+      <h4>NSS IT Wing, NMAMIT</h4>
+      <p>Was responsible for documentation and meeting coordination in the NSS IT Wing of our college, which organized IT-related community service initiatives</p>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>NSS Volunteer</h3>
+      <p>Participated in NSS activities such as blood donation drives and beach cleaning</p>
+    </div>
+    <div class="box" tabindex="0">
+      <h3>Events & Competitions</h3>
+      <p>Actively participated in various workshops, quizzes, and competitions</p>
+    </div>
+    </div>
+</section>
+
+<footer>
+  <section id="contact">
+    <h2 class="section-title" >CONTACT</h2>
+    <br>
+    <div class="social-icons">
+    <a href="mailto:sthuthi1184@gmail.com" target="_blank" rel="noopener" aria-label="Email">
+        <i class="fas fa-envelope"></i>
+      </a>
+    <a href="https://linkedin.com/in/sthuthi1184" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <i class="fab fa-linkedin"></i>
+      </a>
+      <a href="https://github.com/Sthuthi11" target="_blank" rel="noopener" aria-label="GitHub">
+        <i class="fab fa-github"></i>
+      </a>
+      <a href="https://instagram.com/sthuthi.__" target="_blank" rel="noopener" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://discord.com/users/peekaboo_11" target="_blank" rel="noopener" aria-label="Discord">
+        <i class="fab fa-discord"></i>
+      </a>
+    </div>
+  </section>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const navMenu = document.getElementById('nav-menu');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navMenu.classList.toggle('open');
+  });
+
+  // Close nav when link is clicked 
+  document.querySelectorAll('nav a').forEach(link =>
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navMenu.classList.remove('open');
+    })
+  );
+</script>
+
+</body>
+</html>
